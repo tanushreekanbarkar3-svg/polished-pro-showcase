@@ -42,6 +42,7 @@ Deno.serve(async (req) => {
         const message = event.text
         const channel = event.channel
         const user = event.user
+        const messageTs = event.ts // Get original message timestamp for threading
 
         console.log(`Message from ${user} in ${channel}: ${message}`)
 
@@ -84,9 +85,9 @@ Deno.serve(async (req) => {
           responseText = `🤔 I see you want to crawl something, but I didn't find any URLs in your message. Could you please include the URL you'd like me to process?`
         }
 
-        // Send response to Slack if we have something to say
+        // Send response to Slack thread if we have something to say
         if (responseText) {
-          await sendSlackMessage(channel, responseText)
+          await sendSlackMessage(channel, responseText, messageTs)
         }
       }
     }
@@ -183,7 +184,7 @@ async function crawlUrlWithFirecrawl(url: string) {
   }
 }
 
-async function sendSlackMessage(channel: string, text: string) {
+async function sendSlackMessage(channel: string, text: string, threadTs?: string) {
   const slackToken = Deno.env.get('SLACK_BOT_TOKEN')
   
   if (!slackToken) {
@@ -201,6 +202,7 @@ async function sendSlackMessage(channel: string, text: string) {
       body: JSON.stringify({
         channel: channel,
         text: text,
+        thread_ts: threadTs, // Reply in thread if threadTs is provided
         unfurl_links: false,
         unfurl_media: false
       })
