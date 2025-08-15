@@ -4,8 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// GitHub Pages SPA support
-const basename = import.meta.env.PROD ? '/portfolio-tk' : '';
+// GitHub Pages SPA support - only apply basename in production build
+const basename = import.meta.env.PROD && window.location.hostname.includes('github.io') ? '/portfolio-tk' : '';
 
 // Handle GitHub Pages routing
 if (import.meta.env.PROD && window.location.search.includes('/?/')) {
