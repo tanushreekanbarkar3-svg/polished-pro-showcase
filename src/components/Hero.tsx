@@ -155,12 +155,7 @@ const Hero = () => {
               size="lg" 
               className="hover-tech border-primary/30 hover:border-primary"
               onClick={() => {
-                const link = document.createElement('a');
-                link.href = '/resume.pdf';
-                link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                window.open('/resume.pdf', '_blank');
               }}
             >
               <Download className="w-4 h-4 mr-2" />
