@@ -111,38 +111,18 @@ const Contact = () => {
                     variant="outline" 
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
-                    onClick={async () => {
-                      try {
-                        const resumePath = import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf';
-                        const response = await fetch(resumePath);
-                        if (!response.ok) {
-                          // Try alternative path
-                          const altResponse = await fetch('/resume.pdf');
-                          if (!altResponse.ok) throw new Error('File not found');
-                          const blob = await altResponse.blob();
-                          const url = window.URL.createObjectURL(blob);
-                          const link = document.createElement('a');
-                          link.href = url;
-                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                          window.URL.revokeObjectURL(url);
-                        } else {
-                          const blob = await response.blob();
-                          const url = window.URL.createObjectURL(blob);
-                          const link = document.createElement('a');
-                          link.href = url;
-                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                          window.URL.revokeObjectURL(url);
-                        }
-                      } catch (error) {
-                        console.error('Download failed:', error);
-                        window.open(import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf', '_blank');
-                      }
+                    onClick={() => {
+                      console.log('Download button clicked');
+                      const link = document.createElement('a');
+                      link.href = window.location.origin + '/resume.pdf';
+                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                      link.target = '_blank';
+                      link.rel = 'noopener noreferrer';
+                      console.log('Download link created:', link.href);
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                      console.log('Download initiated');
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -213,37 +193,18 @@ const Contact = () => {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    onClick={async () => {
-                      try {
-                        const resumePath = import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf';
-                        const response = await fetch(resumePath);
-                        if (!response.ok) {
-                          const altResponse = await fetch('/resume.pdf');
-                          if (!altResponse.ok) throw new Error('File not found');
-                          const blob = await altResponse.blob();
-                          const url = window.URL.createObjectURL(blob);
-                          const link = document.createElement('a');
-                          link.href = url;
-                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                          window.URL.revokeObjectURL(url);
-                        } else {
-                          const blob = await response.blob();
-                          const url = window.URL.createObjectURL(blob);
-                          const link = document.createElement('a');
-                          link.href = url;
-                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                          window.URL.revokeObjectURL(url);
-                        }
-                      } catch (error) {
-                        console.error('Download failed:', error);
-                        window.open(import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf', '_blank');
-                      }
+                    onClick={() => {
+                      console.log('Second download button clicked');
+                      const link = document.createElement('a');
+                      link.href = window.location.origin + '/resume.pdf';
+                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                      link.target = '_blank';
+                      link.rel = 'noopener noreferrer';
+                      console.log('Second download link created:', link.href);
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                      console.log('Second download initiated');
                     }}
                   >
                     <Download className="w-4 h-4 mr-2" />
