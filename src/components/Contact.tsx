@@ -114,7 +114,7 @@ const Contact = () => {
                     asChild
                   >
                     <a 
-                      href="/resume.pdf" 
+                      href={`${import.meta.env.PROD ? '/portfolio-tk' : ''}/resume.pdf`}
                       download="Tanushree_Kanbarkar_Resume.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -191,7 +191,7 @@ const Contact = () => {
                     asChild
                   >
                     <a 
-                      href="/resume.pdf" 
+                      href={`${import.meta.env.PROD ? '/portfolio-tk' : ''}/resume.pdf`}
                       download="Tanushree_Kanbarkar_Resume.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
