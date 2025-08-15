@@ -139,11 +139,29 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="tech-glow hover-tech bg-gradient-to-r from-primary to-tech border-0">
+            <Button 
+              size="lg" 
+              className="tech-glow hover-tech bg-gradient-to-r from-primary to-tech border-0"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                contactSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <Mail className="w-4 h-4 mr-2" />
               Contact Me
             </Button>
-            <Button variant="outline" size="lg" className="hover-tech border-primary/30 hover:border-primary">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="hover-tech border-primary/30 hover:border-primary"
+              onClick={() => {
+                // Create a download link for the resume
+                const link = document.createElement('a');
+                link.href = '/resume.pdf'; // You'll need to add your actual resume file
+                link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                link.click();
+              }}
+            >
               <Download className="w-4 h-4 mr-2" />
               Download Resume
             </Button>
