@@ -112,8 +112,9 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
+                      const resumeUrl = import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf';
                       const link = document.createElement('a');
-                      link.href = 'https://tanushreekanbarkar3-svg.github.io/portfolio-tk/resume.pdf';
+                      link.href = resumeUrl;
                       link.download = 'Tanushree_Kanbarkar_Resume.pdf';
                       document.body.appendChild(link);
                       link.click();
@@ -189,8 +190,9 @@ const Contact = () => {
                     variant="outline" 
                     size="lg"
                     onClick={() => {
+                      const resumeUrl = import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf';
                       const link = document.createElement('a');
-                      link.href = 'https://tanushreekanbarkar3-svg.github.io/portfolio-tk/resume.pdf';
+                      link.href = resumeUrl;
                       link.download = 'Tanushree_Kanbarkar_Resume.pdf';
                       document.body.appendChild(link);
                       link.click();
