@@ -113,7 +113,7 @@ const Contact = () => {
                     size="lg"
                     onClick={() => {
                       const link = document.createElement('a');
-                      link.href = `${window.location.origin}${import.meta.env.PROD ? '/portfolio-tk' : ''}/resume.pdf`;
+                       link.href = 'https://raw.githubusercontent.com/tanushreekanbarkar3-svg/portfolio-tk/main/public/resume.pdf';
                       link.download = 'Tanushree_Kanbarkar_Resume.pdf';
                       document.body.appendChild(link);
                       link.click();
@@ -190,7 +190,7 @@ const Contact = () => {
                     size="lg"
                     onClick={() => {
                       const link = document.createElement('a');
-                      link.href = `${window.location.origin}${import.meta.env.PROD ? '/portfolio-tk' : ''}/resume.pdf`;
+                      link.href = 'https://raw.githubusercontent.com/tanushreekanbarkar3-svg/portfolio-tk/main/public/resume.pdf';
                       link.download = 'Tanushree_Kanbarkar_Resume.pdf';
                       document.body.appendChild(link);
                       link.click();
