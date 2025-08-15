@@ -112,10 +112,12 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
-                      // Temporary solution - you can replace this with your actual resume
-                      alert('Resume download will be available soon! For now, please connect with me on LinkedIn or send an email for my latest resume.');
-                      // Alternative: redirect to LinkedIn  
-                      // window.open('https://linkedin.com/in/tanushree-kanbarkar/', '_blank');
+                      const link = document.createElement('a');
+                      link.href = '/resume.pdf';
+                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -187,10 +189,12 @@ const Contact = () => {
                     variant="outline" 
                     size="lg"
                     onClick={() => {
-                      // Temporary solution - you can replace this with your actual resume
-                      alert('Resume download will be available soon! For now, please connect with me on LinkedIn or send an email for my latest resume.');
-                      // Alternative: redirect to LinkedIn
-                      // window.open('https://linkedin.com/in/tanushree-kanbarkar/', '_blank');
+                      const link = document.createElement('a');
+                      link.href = '/resume.pdf';
+                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
                     }}
                   >
                     <Download className="w-4 h-4 mr-2" />
