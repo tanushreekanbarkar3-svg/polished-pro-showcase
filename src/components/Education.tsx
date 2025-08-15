@@ -24,7 +24,8 @@ const certifications = [
     name: "AWS Certified Solutions Architect – Associate",
     issuer: "Amazon Web Services",
     type: "Professional Certification",
-    status: "Active"
+    status: "Active",
+    link: "https://www.credly.com/badges/e5fc9612-3afa-402d-8c21-4b013e12e715/linked_in_profile"
   },
   {
     name: "AWS Certified AI Practitioner",
