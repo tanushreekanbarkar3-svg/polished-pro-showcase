@@ -5,6 +5,7 @@ import { SlackBotConfig } from '@/components/SlackBotConfig';
 import { UrlExtractorTest } from '@/components/UrlExtractorTest';
 import { ParselyApiTest } from '@/components/ParselyApiTest';
 import { SlackMessageSimulator } from '@/components/SlackMessageSimulator';
+import SupabaseTest from '@/components/SupabaseTest';
 
 const SlackBot = () => {
   return (
@@ -20,11 +21,12 @@ const SlackBot = () => {
         </Card>
 
         <Tabs defaultValue="config" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="config">Configuration</TabsTrigger>
             <TabsTrigger value="extractor">URL Extractor</TabsTrigger>
             <TabsTrigger value="parsely">Parsely API</TabsTrigger>
             <TabsTrigger value="simulator">Full Test</TabsTrigger>
+            <TabsTrigger value="supabase">Supabase</TabsTrigger>
           </TabsList>
 
           <TabsContent value="config" className="space-y-4">
@@ -41,6 +43,10 @@ const SlackBot = () => {
 
           <TabsContent value="simulator" className="space-y-4">
             <SlackMessageSimulator />
+          </TabsContent>
+
+          <TabsContent value="supabase" className="space-y-4">
+            <SupabaseTest />
           </TabsContent>
         </Tabs>
       </div>
