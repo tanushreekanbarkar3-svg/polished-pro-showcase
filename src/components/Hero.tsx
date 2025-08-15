@@ -157,7 +157,7 @@ const Hero = () => {
               onClick={() => {
                 console.log('Download button clicked');
                 const link = document.createElement('a');
-                link.href = window.location.origin + '/resume.pdf';
+                link.href = `${window.location.origin}${import.meta.env.PROD ? '/portfolio-tk' : ''}/resume.pdf`;
                 link.download = 'Tanushree_Kanbarkar_Resume.pdf';
                 link.target = '_blank';
                 link.rel = 'noopener noreferrer';
