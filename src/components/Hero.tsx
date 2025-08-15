@@ -155,11 +155,10 @@ const Hero = () => {
               size="lg" 
               className="hover-tech border-primary/30 hover:border-primary"
               onClick={() => {
-                // Create a download link for the resume
-                const link = document.createElement('a');
-                link.href = '/resume.pdf'; // You'll need to add your actual resume file
-                link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                link.click();
+                // Temporary solution - you can replace this with your actual resume
+                alert('Resume download will be available soon! For now, please connect with me on LinkedIn or send an email for my latest resume.');
+                // Alternative: redirect to LinkedIn
+                // window.open('https://linkedin.com/in/tanushree-kanbarkar/', '_blank');
               }}
             >
               <Download className="w-4 h-4 mr-2" />
