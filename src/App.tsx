@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // GitHub Pages SPA support
-const basename = import.meta.env.PROD ? '/polished-pro-showcase' : '';
+const basename = import.meta.env.PROD ? '/portfolio-tk' : '';
 
 // Handle GitHub Pages routing
 if (import.meta.env.PROD && window.location.search.includes('/?/')) {
