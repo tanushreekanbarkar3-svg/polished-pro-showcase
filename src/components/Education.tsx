@@ -30,7 +30,8 @@ const certifications = [
     name: "AWS Certified AI Practitioner",
     issuer: "Amazon Web Services",
     type: "AI/ML Certification",
-    status: "Active"
+    status: "Active",
+    link: "https://www.credly.com/badges/c91f2c2a-9c28-4793-9a7a-f7ddb8010bc2"
   }
 ];
 
@@ -102,9 +103,18 @@ const Education = () => {
                           {cert.issuer}
                         </CardDescription>
                       </div>
-                      <Badge className="bg-success text-success-foreground">
-                        {cert.status}
-                      </Badge>
+                      {cert.link ? (
+                        <Badge 
+                          className="bg-success text-success-foreground hover:bg-success/80 cursor-pointer transition-colors"
+                          onClick={() => window.open(cert.link, '_blank')}
+                        >
+                          {cert.status}
+                        </Badge>
+                      ) : (
+                        <Badge className="bg-success text-success-foreground">
+                          {cert.status}
+                        </Badge>
+                      )}
                     </div>
                   </CardHeader>
                   <CardContent>
