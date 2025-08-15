@@ -2,8 +2,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Phone, MapPin, Linkedin, Download, Send } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const { toast } = useToast();
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-primary/5 via-background to-tech/5">
       <div className="container mx-auto px-6">
@@ -94,26 +96,25 @@ const Contact = () => {
                     size="lg"
                     onClick={() => {
                       console.log('Email button clicked');
+                      toast({
+                        title: "Opening email client",
+                        description: "Your default email client should open now",
+                      });
+                      
                       try {
                         const subject = 'Job Opportunity - Site Reliability Engineer';
                         const body = 'Hi Tanushree,\n\nI am reaching out regarding a potential opportunity...';
                         const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                         console.log('Opening mailto link:', mailtoLink);
                         
-                        // Try multiple methods for compatibility
-                        if (window.navigator && window.navigator.clipboard) {
-                          // Copy email to clipboard as fallback
-                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
-                        }
-                        
                         window.location.href = mailtoLink;
                       } catch (error) {
                         console.error('Error opening email:', error);
-                        // Fallback: copy email to clipboard
-                        if (window.navigator && window.navigator.clipboard) {
-                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
-                          alert('Email copied to clipboard: tanushreekanbarkar@gmail.com');
-                        }
+                        toast({
+                          title: "Email error",
+                          description: "Please email tanushreekanbarkar@gmail.com directly",
+                          variant: "destructive"
+                        });
                       }
                     }}
                   >
@@ -205,24 +206,25 @@ const Contact = () => {
                     size="lg" 
                     className="shadow-elegant"
                     onClick={() => {
-                      console.log('Start conversation button clicked');
+                      toast({
+                        title: "Opening email client",
+                        description: "Your default email client should open now",
+                      });
+                      
                       try {
                         const subject = 'Let\'s Start a Conversation';
                         const body = 'Hi Tanushree,\n\nI would like to discuss...';
                         const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                         console.log('Opening mailto link:', mailtoLink);
                         
-                        if (window.navigator && window.navigator.clipboard) {
-                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
-                        }
-                        
                         window.location.href = mailtoLink;
                       } catch (error) {
                         console.error('Error opening email:', error);
-                        if (window.navigator && window.navigator.clipboard) {
-                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
-                          alert('Email copied to clipboard: tanushreekanbarkar@gmail.com');
-                        }
+                        toast({
+                          title: "Email error",
+                          description: "Please email tanushreekanbarkar@gmail.com directly",
+                          variant: "destructive"
+                        });
                       }
                     }}
                   >
