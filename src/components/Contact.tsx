@@ -111,24 +111,49 @@ const Contact = () => {
                     variant="outline" 
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
-                    asChild
+                    onClick={async () => {
+                      try {
+                        const resumePath = import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf';
+                        const response = await fetch(resumePath);
+                        if (!response.ok) {
+                          // Try alternative path
+                          const altResponse = await fetch('/resume.pdf');
+                          if (!altResponse.ok) throw new Error('File not found');
+                          const blob = await altResponse.blob();
+                          const url = window.URL.createObjectURL(blob);
+                          const link = document.createElement('a');
+                          link.href = url;
+                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                          window.URL.revokeObjectURL(url);
+                        } else {
+                          const blob = await response.blob();
+                          const url = window.URL.createObjectURL(blob);
+                          const link = document.createElement('a');
+                          link.href = url;
+                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                          window.URL.revokeObjectURL(url);
+                        }
+                      } catch (error) {
+                        console.error('Download failed:', error);
+                        window.open(import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf', '_blank');
+                      }
+                    }}
                   >
-                    <a 
-                      href={`${import.meta.env.PROD ? '/portfolio-tk' : ''}/resume.pdf`}
-                      download="Tanushree_Kanbarkar_Resume.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <div className="flex items-center gap-4 w-full">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <Download className="w-5 h-5 text-primary" />
-                        </div>
-                        <div className="text-left">
-                          <p className="font-medium">Download Resume</p>
-                          <p className="text-sm text-muted-foreground">Latest PDF version</p>
-                        </div>
+                    <div className="flex items-center gap-4 w-full">
+                      <div className="p-2 bg-primary/10 rounded-lg">
+                        <Download className="w-5 h-5 text-primary" />
                       </div>
-                    </a>
+                      <div className="text-left">
+                        <p className="font-medium">Download Resume</p>
+                        <p className="text-sm text-muted-foreground">Latest PDF version</p>
+                      </div>
+                    </div>
                   </Button>
 
                   <Button 
@@ -188,17 +213,41 @@ const Contact = () => {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    asChild
+                    onClick={async () => {
+                      try {
+                        const resumePath = import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf';
+                        const response = await fetch(resumePath);
+                        if (!response.ok) {
+                          const altResponse = await fetch('/resume.pdf');
+                          if (!altResponse.ok) throw new Error('File not found');
+                          const blob = await altResponse.blob();
+                          const url = window.URL.createObjectURL(blob);
+                          const link = document.createElement('a');
+                          link.href = url;
+                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                          window.URL.revokeObjectURL(url);
+                        } else {
+                          const blob = await response.blob();
+                          const url = window.URL.createObjectURL(blob);
+                          const link = document.createElement('a');
+                          link.href = url;
+                          link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                          window.URL.revokeObjectURL(url);
+                        }
+                      } catch (error) {
+                        console.error('Download failed:', error);
+                        window.open(import.meta.env.PROD ? '/portfolio-tk/resume.pdf' : '/resume.pdf', '_blank');
+                      }
+                    }}
                   >
-                    <a 
-                      href={`${import.meta.env.PROD ? '/portfolio-tk' : ''}/resume.pdf`}
-                      download="Tanushree_Kanbarkar_Resume.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      View Full Resume
-                    </a>
+                    <Download className="w-4 h-4 mr-2" />
+                    View Full Resume
                   </Button>
                 </div>
               </div>
