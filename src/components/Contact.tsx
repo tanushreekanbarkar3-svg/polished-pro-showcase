@@ -93,7 +93,10 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
-                      window.location.href = 'mailto:tanushreekanbarkar@gmail.com?subject=Job Opportunity - Site Reliability Engineer&body=Hi Tanushree,%0D%0A%0D%0AI am reaching out regarding a potential opportunity...';
+                      const subject = encodeURIComponent('Job Opportunity - Site Reliability Engineer');
+                      const body = encodeURIComponent('Hi Tanushree,\n\nI am reaching out regarding a potential opportunity...');
+                      const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${subject}&body=${body}`;
+                      window.open(mailtoLink, '_self');
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -184,7 +187,10 @@ const Contact = () => {
                     size="lg" 
                     className="shadow-elegant"
                     onClick={() => {
-                      window.location.href = 'mailto:tanushreekanbarkar@gmail.com?subject=Let\'s Start a Conversation&body=Hi Tanushree,%0D%0A%0D%0AI would like to discuss...';
+                      const subject = encodeURIComponent('Let\'s Start a Conversation');
+                      const body = encodeURIComponent('Hi Tanushree,\n\nI would like to discuss...');
+                      const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${subject}&body=${body}`;
+                      window.open(mailtoLink, '_self');
                     }}
                   >
                     <Send className="w-4 h-4 mr-2" />
