@@ -37,8 +37,12 @@ All colors MUST be HSL.
 
     --gradient-primary: linear-gradient(135deg, hsl(225 100% 60%), hsl(200 100% 50%));
     --gradient-hero: linear-gradient(135deg, hsl(225 100% 60% / 0.1), hsl(200 100% 50% / 0.1));
+    --gradient-tech: linear-gradient(45deg, hsl(225 100% 60%), hsl(200 100% 50%), hsl(285 100% 65%));
+    --gradient-code: linear-gradient(90deg, hsl(225 100% 60% / 0.05), hsl(200 100% 50% / 0.05));
     --shadow-elegant: 0 10px 30px -10px hsl(225 100% 60% / 0.2);
     --shadow-card: 0 4px 20px -5px hsl(225 100% 60% / 0.1);
+    --shadow-glow: 0 0 40px hsl(225 100% 60% / 0.3);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -96,8 +100,12 @@ All colors MUST be HSL.
 
     --gradient-primary: linear-gradient(135deg, hsl(225 100% 65%), hsl(200 100% 60%));
     --gradient-hero: linear-gradient(135deg, hsl(225 100% 65% / 0.1), hsl(200 100% 60% / 0.1));
+    --gradient-tech: linear-gradient(45deg, hsl(225 100% 65%), hsl(200 100% 60%), hsl(285 100% 70%));
+    --gradient-code: linear-gradient(90deg, hsl(225 100% 65% / 0.1), hsl(200 100% 60% / 0.1));
     --shadow-elegant: 0 10px 30px -10px hsl(225 100% 65% / 0.3);
     --shadow-card: 0 4px 20px -5px hsl(225 100% 65% / 0.2);
+    --shadow-glow: 0 0 40px hsl(225 100% 65% / 0.4);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -124,4 +132,95 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Tech-savvy animations and effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+  50% { box-shadow: 0 0 30px hsl(var(--primary) / 0.6); }
+}
+
+@keyframes code-flow {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes matrix-rain {
+  0% { transform: translateY(-100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 50% { border-color: transparent; }
+  51%, 100% { border-color: hsl(var(--primary)); }
+}
+
+.tech-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.tech-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.code-animation {
+  animation: code-flow 3s ease-in-out infinite;
+}
+
+.matrix-char {
+  animation: matrix-rain 4s linear infinite;
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 2px solid hsl(var(--primary));
+  white-space: nowrap;
+  animation: typing 2s steps(20, end), blink 0.75s step-end infinite;
+}
+
+.gradient-tech {
+  background: var(--gradient-tech);
+  background-size: 300% 300%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.tech-grid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.code-block {
+  background: var(--gradient-code);
+  border-left: 4px solid hsl(var(--primary));
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.hover-tech {
+  transition: var(--transition-smooth);
+}
+
+.hover-tech:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }
