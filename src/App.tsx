@@ -18,6 +18,7 @@ if (import.meta.env.PROD && window.location.search.includes('/?/')) {
 }
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import SlackBot from "./pages/SlackBot";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
       <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/slack-bot" element={<SlackBot />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
