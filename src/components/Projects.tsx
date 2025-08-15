@@ -134,17 +134,6 @@ const Projects = () => {
                       ))}
                     </div>
                   </div>
-
-                  <div className="flex gap-3 pt-4 border-t">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <Github className="w-4 h-4 mr-2" />
-                      View Code
-                    </Button>
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Live Demo
-                    </Button>
-                  </div>
                 </div>
               </CardContent>
             </Card>
