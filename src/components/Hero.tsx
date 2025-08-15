@@ -154,13 +154,23 @@ const Hero = () => {
               variant="outline" 
               size="lg" 
               className="hover-tech border-primary/30 hover:border-primary"
-              onClick={() => {
-                const link = document.createElement('a');
-                link.href = '/resume.pdf';
-                link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+              onClick={async () => {
+                try {
+                  const response = await fetch('/resume.pdf');
+                  if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                  }
+                } catch (error) {
+                  console.error('Download failed:', error);
+                }
               }}
             >
               <Download className="w-4 h-4 mr-2" />
