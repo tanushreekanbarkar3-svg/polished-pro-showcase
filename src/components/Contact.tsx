@@ -112,17 +112,10 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
-                      console.log('Download button clicked');
-                      const link = document.createElement('a');
-                      link.href = import.meta.env.PROD ? `${window.location.origin}/portfolio-tk/resume.pdf` : '/resume.pdf';
-                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                      link.target = '_blank';
-                      link.rel = 'noopener noreferrer';
-                      console.log('Download link created:', link.href);
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                      console.log('Download initiated');
+                      const resumeUrl = import.meta.env.PROD ? 
+                        'https://tanushreekanbarkar3-svg.github.io/portfolio-tk/resume.pdf' : 
+                        '/resume.pdf';
+                      window.open(resumeUrl, '_blank');
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -194,17 +187,10 @@ const Contact = () => {
                     variant="outline" 
                     size="lg"
                     onClick={() => {
-                      console.log('Download button clicked');
-                      const link = document.createElement('a');
-                      link.href = import.meta.env.PROD ? `${window.location.origin}/portfolio-tk/resume.pdf` : '/resume.pdf';
-                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                      link.target = '_blank';
-                      link.rel = 'noopener noreferrer';
-                      console.log('Download link created:', link.href);
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                      console.log('Download initiated');
+                      const resumeUrl = import.meta.env.PROD ? 
+                        'https://tanushreekanbarkar3-svg.github.io/portfolio-tk/resume.pdf' : 
+                        '/resume.pdf';
+                      window.open(resumeUrl, '_blank');
                     }}
                   >
                     <Download className="w-4 h-4 mr-2" />
