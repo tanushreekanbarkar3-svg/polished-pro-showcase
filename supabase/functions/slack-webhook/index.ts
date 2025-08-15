@@ -35,7 +35,9 @@ Deno.serve(async (req) => {
     // Handle Slack events
     if (payload.type === 'event_callback' && payload.event) {
       const event = payload.event
-      console.log('Processing event:', event.type)
+      console.log('=== EVENT PROCESSING DEBUG ===')
+      console.log('Event type:', event.type)
+      console.log('Event:', JSON.stringify(event, null, 2))
 
       // Only respond to messages (not bot messages to avoid loops)
       if (event.type === 'message' && !event.bot_id && event.text) {
@@ -44,7 +46,9 @@ Deno.serve(async (req) => {
         const user = event.user
         const messageTs = event.ts // Get original message timestamp for threading
 
-        console.log(`Message from ${user} in ${channel}: ${message}`)
+        console.log('=== MESSAGE PROCESSING DEBUG ===')
+        console.log(`Message from ${user} in ${channel}: "${message}"`)
+        console.log('Message timestamp:', messageTs)
 
         // Extract URLs from the message
         const urls = extractUrls(message)
@@ -58,6 +62,7 @@ Deno.serve(async (req) => {
         let responseText = ''
         
         if (isRecrawlRequest && urls.length > 0) {
+          console.log('🔥 Processing recrawl request with URLs')
           responseText = `🔥 Starting Firecrawl analysis for ${urls.length} URL(s)...\n${urls.map(url => `• ${url}`).join('\n')}`
           
           // Process URLs with Firecrawl
@@ -80,16 +85,35 @@ Deno.serve(async (req) => {
             }
           }
         } else if (urls.length > 0) {
+          console.log('📎 Found URLs but no recrawl intent')
           responseText = `📎 I detected ${urls.length} URL(s) in your message:\n${urls.map(url => `• ${url}`).join('\n')}\n\n💡 Say "crawl" or "analyze" to process them with Firecrawl!`
         } else if (isRecrawlRequest) {
+          console.log('🤔 Recrawl intent but no URLs found')
           responseText = `🤔 I see you want to crawl something, but I didn't find any URLs in your message. Could you please include the URL you'd like me to process?`
+        } else {
+          console.log('👋 General message - responding with help')
+          responseText = `👋 Hi! I'm a crawling bot. Send me URLs with words like "crawl", "analyze", or "process" and I'll analyze them for you!`
         }
+
+        console.log('=== RESPONSE PREPARATION ===')
+        console.log('Response text length:', responseText.length)
+        console.log('Response preview:', responseText.substring(0, 200) + '...')
 
         // Send response to Slack thread if we have something to say
         if (responseText) {
+          console.log('🚀 Calling sendSlackMessage...')
           await sendSlackMessage(channel, responseText, messageTs)
+        } else {
+          console.log('❌ No response text generated')
         }
+      } else {
+        console.log('=== MESSAGE IGNORED ===')
+        console.log('Reason: event.type =', event.type, ', bot_id =', event.bot_id, ', has text =', !!event.text)
       }
+    } else {
+      console.log('=== EVENT IGNORED ===')
+      console.log('Payload type:', payload.type)
+      console.log('Has event:', !!payload.event)
     }
 
     return new Response('OK', { headers: corsHeaders })
