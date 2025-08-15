@@ -111,14 +111,20 @@ const Contact = () => {
                     variant="outline" 
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
-                    onClick={() => {
-                      const link = document.createElement('a');
-                       link.href = 'https://raw.githubusercontent.com/tanushreekanbarkar3-svg/portfolio-tk/main/public/resume.pdf';
-                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                    }}
+                     onClick={() => {
+                       console.log('Download button clicked');
+                       const resumeUrl = 'https://raw.githubusercontent.com/tanushreekanbarkar3-svg/portfolio-tk/main/public/resume.pdf';
+                       console.log('Download link created:', resumeUrl);
+                       const link = document.createElement('a');
+                       link.href = resumeUrl;
+                       link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                       link.target = '_blank';
+                       link.rel = 'noopener noreferrer';
+                       document.body.appendChild(link);
+                       link.click();
+                       document.body.removeChild(link);
+                       console.log('Download initiated');
+                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
                       <div className="p-2 bg-primary/10 rounded-lg">
@@ -188,14 +194,20 @@ const Contact = () => {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    onClick={() => {
-                      const link = document.createElement('a');
-                      link.href = 'https://raw.githubusercontent.com/tanushreekanbarkar3-svg/portfolio-tk/main/public/resume.pdf';
-                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                    }}
+                     onClick={() => {
+                       console.log('Second download button clicked');
+                       const resumeUrl = 'https://raw.githubusercontent.com/tanushreekanbarkar3-svg/portfolio-tk/main/public/resume.pdf';
+                       console.log('Second download link created:', resumeUrl);
+                       const link = document.createElement('a');
+                       link.href = resumeUrl;
+                       link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                       link.target = '_blank';
+                       link.rel = 'noopener noreferrer';
+                       document.body.appendChild(link);
+                       link.click();
+                       document.body.removeChild(link);
+                       console.log('Second download initiated');
+                     }}
                   >
                     <Download className="w-4 h-4 mr-2" />
                     View Full Resume
