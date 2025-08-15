@@ -155,7 +155,7 @@ const Hero = () => {
               size="lg" 
               className="hover-tech border-primary/30 hover:border-primary"
               onClick={() => {
-                window.open('/resume.pdf', '_blank');
+                alert('Resume temporarily unavailable. Please email tanushreekanbarkar@gmail.com or connect on LinkedIn for my latest resume.');
               }}
             >
               <Download className="w-4 h-4 mr-2" />

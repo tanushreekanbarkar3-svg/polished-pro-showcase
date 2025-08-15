@@ -112,7 +112,7 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
-                      window.open('/resume.pdf', '_blank');
+                      alert('Resume temporarily unavailable. Please email tanushreekanbarkar@gmail.com or connect on LinkedIn for my latest resume.');
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -184,7 +184,7 @@ const Contact = () => {
                     variant="outline" 
                     size="lg"
                     onClick={() => {
-                      window.open('/resume.pdf', '_blank');
+                      alert('Resume temporarily unavailable. Please email tanushreekanbarkar@gmail.com or connect on LinkedIn for my latest resume.');
                     }}
                   >
                     <Download className="w-4 h-4 mr-2" />
