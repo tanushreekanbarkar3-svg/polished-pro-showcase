@@ -187,35 +187,59 @@ async function crawlUrlWithFirecrawl(url: string) {
 async function sendSlackMessage(channel: string, text: string, threadTs?: string) {
   const slackToken = Deno.env.get('SLACK_BOT_TOKEN')
   
+  console.log('=== SLACK MESSAGE DEBUG ===')
+  console.log('Channel:', channel)
+  console.log('Text preview:', text.substring(0, 100) + '...')
+  console.log('Thread TS:', threadTs)
+  console.log('Token exists:', !!slackToken)
+  console.log('Token starts with xoxb:', slackToken?.startsWith('xoxb-'))
+  
   if (!slackToken) {
-    console.error('SLACK_BOT_TOKEN not found in environment')
+    console.error('❌ SLACK_BOT_TOKEN not found in environment')
+    return
+  }
+
+  if (!slackToken.startsWith('xoxb-')) {
+    console.error('❌ SLACK_BOT_TOKEN does not start with xoxb- (got:', slackToken.substring(0, 10) + '...)')
     return
   }
 
   try {
+    console.log('🚀 Sending message to Slack API...')
+    
+    const payload = {
+      channel: channel,
+      text: text,
+      thread_ts: threadTs,
+      unfurl_links: false,
+      unfurl_media: false
+    }
+    
+    console.log('Payload:', JSON.stringify(payload, null, 2))
+    
     const response = await fetch('https://slack.com/api/chat.postMessage', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${slackToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        channel: channel,
-        text: text,
-        thread_ts: threadTs, // Reply in thread if threadTs is provided
-        unfurl_links: false,
-        unfurl_media: false
-      })
+      body: JSON.stringify(payload)
     })
 
+    console.log('Slack API Response Status:', response.status)
+    console.log('Slack API Response Headers:', Object.fromEntries(response.headers.entries()))
+    
     const result = await response.json()
+    console.log('Slack API Response Body:', JSON.stringify(result, null, 2))
     
     if (!result.ok) {
-      console.error('Failed to send Slack message:', result.error)
+      console.error('❌ Slack API Error:', result.error)
+      console.error('❌ Full error response:', result)
     } else {
-      console.log('Message sent successfully to Slack')
+      console.log('✅ Message sent successfully to Slack')
     }
   } catch (error) {
-    console.error('Error sending message to Slack:', error)
+    console.error('❌ Network error sending message to Slack:', error)
+    console.error('❌ Error details:', error.message, error.stack)
   }
 }
