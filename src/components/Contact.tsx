@@ -112,7 +112,12 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
-                      alert('Resume temporarily unavailable. Please email tanushreekanbarkar@gmail.com or connect on LinkedIn for my latest resume.');
+                      const link = document.createElement('a');
+                      link.href = '/resume.pdf';
+                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -184,7 +189,12 @@ const Contact = () => {
                     variant="outline" 
                     size="lg"
                     onClick={() => {
-                      alert('Resume temporarily unavailable. Please email tanushreekanbarkar@gmail.com or connect on LinkedIn for my latest resume.');
+                      const link = document.createElement('a');
+                      link.href = '/resume.pdf';
+                      link.download = 'Tanushree_Kanbarkar_Resume.pdf';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
                     }}
                   >
                     <Download className="w-4 h-4 mr-2" />
