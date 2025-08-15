@@ -16,9 +16,9 @@ const skillCategories = [
     title: "Cloud Platforms",
     icon: Cloud,
     skills: [
-      { name: "AWS", level: "Expert" },
-      { name: "GCP", level: "Intermediate" },
-      { name: "Azure", level: "Basic" }
+      { name: "AWS" },
+      { name: "GCP" },
+      { name: "Azure" }
     ],
     color: "text-blue-600"
   },
@@ -26,12 +26,12 @@ const skillCategories = [
     title: "Programming Languages",
     icon: Code,
     skills: [
-      { name: "Python", level: "Expert" },
-      { name: "Bash", level: "Expert" },
-      { name: "JavaScript", level: "Intermediate" },
-      { name: "Go", level: "Learning" },
-      { name: "Java", level: "Intermediate" },
-      { name: "Node.js", level: "Intermediate" }
+      { name: "Python" },
+      { name: "Bash" },
+      { name: "JavaScript" },
+      { name: "Go" },
+      { name: "Java" },
+      { name: "Node.js" }
     ],
     color: "text-green-600"
   },
@@ -39,11 +39,11 @@ const skillCategories = [
     title: "DevOps & SRE",
     icon: GitBranch,
     skills: [
-      { name: "Terraform", level: "Expert" },
-      { name: "Ansible", level: "Expert" },
-      { name: "Jenkins", level: "Expert" },
-      { name: "CI/CD", level: "Expert" },
-      { name: "Incident Management", level: "Expert" }
+      { name: "Terraform" },
+      { name: "Ansible" },
+      { name: "Jenkins" },
+      { name: "CI/CD" },
+      { name: "Incident Management" }
     ],
     color: "text-purple-600"
   },
@@ -51,11 +51,11 @@ const skillCategories = [
     title: "Observability",
     icon: Monitor,
     skills: [
-      { name: "Datadog", level: "Expert" },
-      { name: "Prometheus", level: "Expert" },
-      { name: "Grafana", level: "Expert" },
-      { name: "SLO/SLI Tracking", level: "Expert" },
-      { name: "Alerting", level: "Expert" }
+      { name: "Datadog" },
+      { name: "Prometheus" },
+      { name: "Grafana" },
+      { name: "SLO/SLI Tracking" },
+      { name: "Alerting" }
     ],
     color: "text-orange-600"
   },
@@ -63,8 +63,8 @@ const skillCategories = [
     title: "Containers & Orchestration",
     icon: Container,
     skills: [
-      { name: "Docker", level: "Expert" },
-      { name: "Kubernetes (EKS)", level: "Intermediate" }
+      { name: "Docker" },
+      { name: "Kubernetes (EKS)" }
     ],
     color: "text-blue-500"
   },
@@ -72,11 +72,11 @@ const skillCategories = [
     title: "Databases & Messaging",
     icon: Database,
     skills: [
-      { name: "MySQL", level: "Intermediate" },
-      { name: "Snowflake", level: "Intermediate" },
-      { name: "Redis", level: "Intermediate" },
-      { name: "Kafka", level: "Intermediate" },
-      { name: "Firebase", level: "Basic" }
+      { name: "MySQL" },
+      { name: "Snowflake" },
+      { name: "Redis" },
+      { name: "Kafka" },
+      { name: "Firebase" }
     ],
     color: "text-red-600"
   },
@@ -84,11 +84,11 @@ const skillCategories = [
     title: "AI/ML Technologies",
     icon: Brain,
     skills: [
-      { name: "HuggingFace", level: "Intermediate" },
-      { name: "TensorFlow", level: "Beginner" },
-      { name: "GenAI Integration", level: "Intermediate" },
-      { name: "LLMs", level: "Intermediate" },
-      { name: "NLP", level: "Intermediate" }
+      { name: "HuggingFace" },
+      { name: "TensorFlow" },
+      { name: "GenAI Integration" },
+      { name: "LLMs" },
+      { name: "NLP" }
     ],
     color: "text-pink-600"
   },
@@ -96,28 +96,15 @@ const skillCategories = [
     title: "Security & Compliance",
     icon: Shield,
     skills: [
-      { name: "Security Guardrails", level: "Expert" },
-      { name: "Policy Enforcement", level: "Expert" },
-      { name: "Secure Coding", level: "Expert" },
-      { name: "Compliance Monitoring", level: "Expert" }
+      { name: "Security Guardrails" },
+      { name: "Policy Enforcement" },
+      { name: "Secure Coding" },
+      { name: "Compliance Monitoring" }
     ],
     color: "text-amber-600"
   }
 ];
 
-const getLevelColor = (level: string) => {
-  switch (level) {
-    case "Expert":
-      return "bg-success text-success-foreground";
-    case "Intermediate":
-      return "bg-primary text-primary-foreground";
-    case "Beginner":
-    case "Learning":
-      return "bg-secondary text-secondary-foreground";
-    default:
-      return "bg-muted text-muted-foreground";
-  }
-};
 
 const Skills = () => {
   return (
@@ -142,11 +129,8 @@ const Skills = () => {
               <CardContent>
                 <div className="space-y-3">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="flex items-center justify-between gap-2">
+                    <div key={skillIndex} className="flex items-center justify-center">
                       <span className="text-sm font-medium">{skill.name}</span>
-                      <Badge className={`text-xs ${getLevelColor(skill.level)}`}>
-                        {skill.level}
-                      </Badge>
                     </div>
                   ))}
                 </div>
