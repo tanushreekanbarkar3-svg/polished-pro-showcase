@@ -93,10 +93,28 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
-                      const subject = encodeURIComponent('Job Opportunity - Site Reliability Engineer');
-                      const body = encodeURIComponent('Hi Tanushree,\n\nI am reaching out regarding a potential opportunity...');
-                      const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${subject}&body=${body}`;
-                      window.open(mailtoLink, '_self');
+                      console.log('Email button clicked');
+                      try {
+                        const subject = 'Job Opportunity - Site Reliability Engineer';
+                        const body = 'Hi Tanushree,\n\nI am reaching out regarding a potential opportunity...';
+                        const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                        console.log('Opening mailto link:', mailtoLink);
+                        
+                        // Try multiple methods for compatibility
+                        if (window.navigator && window.navigator.clipboard) {
+                          // Copy email to clipboard as fallback
+                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
+                        }
+                        
+                        window.location.href = mailtoLink;
+                      } catch (error) {
+                        console.error('Error opening email:', error);
+                        // Fallback: copy email to clipboard
+                        if (window.navigator && window.navigator.clipboard) {
+                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
+                          alert('Email copied to clipboard: tanushreekanbarkar@gmail.com');
+                        }
+                      }
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -187,10 +205,25 @@ const Contact = () => {
                     size="lg" 
                     className="shadow-elegant"
                     onClick={() => {
-                      const subject = encodeURIComponent('Let\'s Start a Conversation');
-                      const body = encodeURIComponent('Hi Tanushree,\n\nI would like to discuss...');
-                      const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${subject}&body=${body}`;
-                      window.open(mailtoLink, '_self');
+                      console.log('Start conversation button clicked');
+                      try {
+                        const subject = 'Let\'s Start a Conversation';
+                        const body = 'Hi Tanushree,\n\nI would like to discuss...';
+                        const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                        console.log('Opening mailto link:', mailtoLink);
+                        
+                        if (window.navigator && window.navigator.clipboard) {
+                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
+                        }
+                        
+                        window.location.href = mailtoLink;
+                      } catch (error) {
+                        console.error('Error opening email:', error);
+                        if (window.navigator && window.navigator.clipboard) {
+                          window.navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
+                          alert('Email copied to clipboard: tanushreekanbarkar@gmail.com');
+                        }
+                      }
                     }}
                   >
                     <Send className="w-4 h-4 mr-2" />
