@@ -95,27 +95,11 @@ const Contact = () => {
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
                     onClick={() => {
-                      console.log('Email button clicked');
+                      navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
                       toast({
-                        title: "Opening email client",
-                        description: "Your default email client should open now",
+                        title: "Email copied!",
+                        description: "tanushreekanbarkar@gmail.com has been copied to your clipboard",
                       });
-                      
-                      try {
-                        const subject = 'Job Opportunity - Site Reliability Engineer';
-                        const body = 'Hi Tanushree,\n\nI am reaching out regarding a potential opportunity...';
-                        const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                        console.log('Opening mailto link:', mailtoLink);
-                        
-                        window.location.href = mailtoLink;
-                      } catch (error) {
-                        console.error('Error opening email:', error);
-                        toast({
-                          title: "Email error",
-                          description: "Please email tanushreekanbarkar@gmail.com directly",
-                          variant: "destructive"
-                        });
-                      }
                     }}
                   >
                     <div className="flex items-center gap-4 w-full">
@@ -206,26 +190,11 @@ const Contact = () => {
                     size="lg" 
                     className="shadow-elegant"
                     onClick={() => {
+                      navigator.clipboard.writeText('tanushreekanbarkar@gmail.com');
                       toast({
-                        title: "Opening email client",
-                        description: "Your default email client should open now",
+                        title: "Email copied!",
+                        description: "tanushreekanbarkar@gmail.com has been copied to your clipboard",
                       });
-                      
-                      try {
-                        const subject = 'Let\'s Start a Conversation';
-                        const body = 'Hi Tanushree,\n\nI would like to discuss...';
-                        const mailtoLink = `mailto:tanushreekanbarkar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                        console.log('Opening mailto link:', mailtoLink);
-                        
-                        window.location.href = mailtoLink;
-                      } catch (error) {
-                        console.error('Error opening email:', error);
-                        toast({
-                          title: "Email error",
-                          description: "Please email tanushreekanbarkar@gmail.com directly",
-                          variant: "destructive"
-                        });
-                      }
                     }}
                   >
                     <Send className="w-4 h-4 mr-2" />
