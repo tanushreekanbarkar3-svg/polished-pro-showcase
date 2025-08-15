@@ -111,29 +111,24 @@ const Contact = () => {
                     variant="outline" 
                     className="w-full justify-start text-left h-auto p-4 shadow-card" 
                     size="lg"
-                     onClick={() => {
-                        console.log('Download button clicked');
-                        const link = document.createElement('a');
-                        link.href = window.location.origin + '/resume.pdf';
-                        link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                        console.log('Download link created:', link.href);
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        console.log('Download initiated');
-                     }}
+                    asChild
                   >
-                    <div className="flex items-center gap-4 w-full">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <Download className="w-5 h-5 text-primary" />
+                    <a 
+                      href="/resume.pdf" 
+                      download="Tanushree_Kanbarkar_Resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="flex items-center gap-4 w-full">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <Download className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="text-left">
+                          <p className="font-medium">Download Resume</p>
+                          <p className="text-sm text-muted-foreground">Latest PDF version</p>
+                        </div>
                       </div>
-                      <div className="text-left">
-                        <p className="font-medium">Download Resume</p>
-                        <p className="text-sm text-muted-foreground">Latest PDF version</p>
-                      </div>
-                    </div>
+                    </a>
                   </Button>
 
                   <Button 
@@ -193,22 +188,17 @@ const Contact = () => {
                   <Button 
                     variant="outline" 
                     size="lg"
-                     onClick={() => {
-                        console.log('Second download button clicked');
-                        const link = document.createElement('a');
-                        link.href = window.location.origin + '/resume.pdf';
-                        link.download = 'Tanushree_Kanbarkar_Resume.pdf';
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                        console.log('Second download link created:', link.href);
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        console.log('Second download initiated');
-                     }}
+                    asChild
                   >
-                    <Download className="w-4 h-4 mr-2" />
-                    View Full Resume
+                    <a 
+                      href="/resume.pdf" 
+                      download="Tanushree_Kanbarkar_Resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      View Full Resume
+                    </a>
                   </Button>
                 </div>
               </div>
