@@ -58,32 +58,16 @@ Deno.serve(async (req) => {
         const isRecrawlRequest = detectRecrawlIntent(message)
         console.log('Is recrawl request:', isRecrawlRequest)
 
-        // Prepare response
+        // Prepare immediate response
         let responseText = ''
         
         if (isRecrawlRequest && urls.length > 0) {
           console.log('🔥 Processing recrawl request with URLs')
-          responseText = `🔥 Starting Firecrawl analysis for ${urls.length} URL(s)...\n${urls.map(url => `• ${url}`).join('\n')}`
+          responseText = `🔥 Starting analysis for ${urls.length} URL(s)...\n${urls.map(url => `• ${url}`).join('\n')}\n\n⏳ Processing in background, will update you shortly!`
           
-          // Process URLs with Firecrawl
-          for (const url of urls) {
-            try {
-              const crawlResult = await crawlUrlWithFirecrawl(url)
-              if (crawlResult.success) {
-                responseText += `\n\n✅ **${url}**\n📄 ${crawlResult.data.description || 'Content crawled successfully'}`
-                
-                // Add word count if available
-                if (crawlResult.data.markdown) {
-                  const wordCount = crawlResult.data.markdown.split(' ').length
-                  responseText += `\n📊 Word count: ${wordCount}`
-                }
-              } else {
-                responseText += `\n\n❌ **${url}**\n💥 Failed to crawl: ${crawlResult.error}`
-              }
-            } catch (error) {
-              responseText += `\n\n❌ **${url}**\n💥 Error: ${error.message}`
-            }
-          }
+          // Start background processing without blocking
+          EdgeRuntime.waitUntil(processUrlsInBackground(channel, urls, messageTs))
+          
         } else if (urls.length > 0) {
           console.log('📎 Found URLs but no recrawl intent')
           responseText = `📎 I detected ${urls.length} URL(s) in your message:\n${urls.map(url => `• ${url}`).join('\n')}\n\n💡 Say "crawl" or "analyze" to process them with Firecrawl!`
@@ -99,7 +83,7 @@ Deno.serve(async (req) => {
         console.log('Response text length:', responseText.length)
         console.log('Response preview:', responseText.substring(0, 200) + '...')
 
-        // Send response to Slack thread if we have something to say
+        // Send immediate response to Slack thread
         if (responseText) {
           console.log('🚀 Calling sendSlackMessage...')
           await sendSlackMessage(channel, responseText, messageTs)
@@ -141,6 +125,41 @@ function detectRecrawlIntent(text: string): boolean {
   
   const lowerText = text.toLowerCase()
   return recrawlKeywords.some(keyword => lowerText.includes(keyword))
+}
+
+async function processUrlsInBackground(channel: string, urls: string[], threadTs: string) {
+  console.log('🔄 Starting background URL processing for', urls.length, 'URLs')
+  
+  for (const url of urls) {
+    try {
+      console.log(`🔍 Processing URL: ${url}`)
+      const crawlResult = await crawlUrlWithFirecrawl(url)
+      
+      let updateText = ''
+      if (crawlResult.success) {
+        updateText = `✅ **${url}**\n📄 ${crawlResult.data.title || 'No title'}\n📝 ${crawlResult.data.description || 'Content crawled successfully'}`
+        
+        // Add word count if available
+        if (crawlResult.data.markdown) {
+          const wordCount = crawlResult.data.markdown.split(' ').length
+          updateText += `\n📊 Word count: ${wordCount}`
+        }
+      } else {
+        updateText = `❌ **${url}**\n💥 Failed to crawl: ${crawlResult.error}`
+      }
+      
+      // Send individual result as it completes
+      await sendSlackMessage(channel, updateText, threadTs)
+      
+    } catch (error) {
+      console.error(`Error processing ${url}:`, error)
+      await sendSlackMessage(channel, `❌ **${url}**\n💥 Error: ${error.message}`, threadTs)
+    }
+  }
+  
+  // Send completion message
+  await sendSlackMessage(channel, `🎉 Finished processing all ${urls.length} URLs!`, threadTs)
+  console.log('✅ Background processing completed')
 }
 
 async function crawlUrlWithFirecrawl(url: string) {
